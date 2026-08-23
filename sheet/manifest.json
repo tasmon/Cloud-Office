@@ -1,0 +1,15 @@
+{
+  "name": "Cloud Sheet",
+  "short_name": "Cloud Sheet",
+  "description": "A private, offline-capable spreadsheet with formulas that runs entirely in your browser.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#1e8e5a",
+  "orientation": "any",
+  "icons": [
+    { "src": "../icons/sheet-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "../icons/sheet-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
