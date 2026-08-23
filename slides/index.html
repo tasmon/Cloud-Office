@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cloud PowerPoint</title>
+<meta name="theme-color" content="#d65d3a" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="../icons/slides.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="../icons/slides-192.png" />
+<link rel="stylesheet" href="../shared/theme.css" />
+<link rel="stylesheet" href="slides.css" />
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <header class="appbar">
+    <div class="appbar-left">
+      <a class="hub-link" href="../index.html" title="Back to Cloud Office" aria-label="Back to Cloud Office"><span class="mark">C</span></a>
+      <input id="deckTitle" class="doc-title" value="Untitled presentation" spellcheck="false" aria-label="Presentation title" />
+    </div>
+    <div class="appbar-right">
+      <span class="save-status" id="saveStatus">Saved</span>
+      <button class="btn ghost" id="btnPresent">▶ Present</button>
+      <div class="menu-wrap">
+        <button class="btn primary" id="btnExportMenu">Export ▾</button>
+        <div class="menu" id="exportMenu">
+          <button data-export="pptx">PowerPoint (.pptx)</button>
+          <button data-export="pdf">Print / PDF</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="toolbar" id="toolbar">
+    <div class="tgroup">
+      <button class="tbtn wide" id="btnAddText">+ Text</button>
+      <button class="tbtn" id="btnAddRect" title="Rectangle">▭</button>
+      <button class="tbtn" id="btnAddEllipse" title="Ellipse">◯</button>
+      <button class="tbtn" id="btnAddImage" title="Insert image">🖼</button>
+      <input type="file" id="imageInput" accept="image/*" hidden />
+    </div>
+    <span class="tsep"></span>
+    <div class="tgroup" id="textTools">
+      <select id="fontSize" title="Font size">
+        <option>12</option><option>14</option><option>18</option><option selected>24</option>
+        <option>32</option><option>40</option><option>54</option><option>72</option>
+      </select>
+      <button class="tbtn" id="tBold" title="Bold"><b>B</b></button>
+      <button class="tbtn" id="tItalic" title="Italic"><i>I</i></button>
+      <button class="tbtn" data-align="left" title="Align left">⯇</button>
+      <button class="tbtn" data-align="center" title="Align center">☰</button>
+      <button class="tbtn" data-align="right" title="Align right">⯈</button>
+      <label class="tbtn color-btn" title="Text color">A<input type="color" id="textColor" value="#14161f" /></label>
+    </div>
+    <span class="tsep"></span>
+    <div class="tgroup">
+      <label class="tbtn color-btn" title="Fill color">▧<input type="color" id="fillColor" value="#d65d3a" /></label>
+      <label class="tbtn color-btn" title="Slide background">▤<input type="color" id="bgColor" value="#ffffff" /></label>
+      <button class="tbtn" id="btnDeleteEl" title="Delete selected">🗑</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <aside class="slide-panel" id="slidePanel">
+      <div class="slide-list" id="slideList"></div>
+      <div class="panel-actions">
+        <button class="btn ghost small" id="btnAddSlideBlank">+ Blank</button>
+        <button class="btn ghost small" id="btnAddSlideTitle">+ Title</button>
+        <button class="btn ghost small" id="btnAddSlideContent">+ Title &amp; content</button>
+      </div>
+    </aside>
+
+    <main class="canvas-wrap">
+      <div class="slide-stage" id="slideStage">
+        <div class="slide" id="slide"></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="statusbar">
+    <span id="slideCountLabel">1 / 1</span>
+    <span class="sep">·</span>
+    <span>Stored only in this browser</span>
+  </footer>
+</div>
+
+<!-- Present mode -->
+<div class="present-overlay" id="presentOverlay">
+  <div class="present-slide" id="presentSlide"></div>
+  <button class="present-exit" id="btnExitPresent">Esc — Exit</button>
+  <div class="present-nav">
+    <button id="presPrev">‹</button>
+    <span id="presCounter">1 / 1</span>
+    <button id="presNext">›</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script src="../shared/db.js"></script>
+<script src="slides.js"></script>
+</body>
+</html>
