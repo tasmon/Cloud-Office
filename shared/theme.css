@@ -1,0 +1,69 @@
+/* ============================================================
+   Cloud Office — shared design tokens
+   ============================================================ */
+:root{
+  --ink:        #14161f;
+  --ink-soft:   #5b5d6b;
+  --ink-faint:  #90929e;
+  --paper:      #f7f6f2;
+  --paper-raised: #ffffff;
+  --line:       #e1ddd2;
+  --line-strong:#c9c4b6;
+
+  --word:       #3457d5;
+  --word-tint:  #eaf0ff;
+  --word-ink:   #1f3aa8;
+
+  --sheet:      #1e8e5a;
+  --sheet-tint: #e9f7ef;
+  --sheet-ink:  #146b43;
+
+  --slides:     #d65d3a;
+  --slides-tint:#fcece5;
+  --slides-ink: #a8452a;
+
+  --danger:     #c0392b;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --shadow-sm:  0 1px 2px rgba(20,22,31,.06), 0 1px 1px rgba(20,22,31,.04);
+  --shadow-md:  0 6px 20px rgba(20,22,31,.10), 0 2px 6px rgba(20,22,31,.06);
+  --shadow-lg:  0 20px 50px rgba(20,22,31,.16), 0 6px 16px rgba(20,22,31,.08);
+
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family:var(--font-ui);
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+button, input, select, textarea{ font-family:inherit; color:inherit; }
+button{ cursor:pointer; }
+a{ color:inherit; }
+
+:focus-visible{
+  outline:2.5px solid var(--word);
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+}
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip:rect(0 0 0 0); white-space:nowrap;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar{ width:11px; height:11px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:20px; border:3px solid var(--paper); }
+::-webkit-scrollbar-thumb:hover{ background:var(--ink-faint); }
