@@ -1,4 +1,4 @@
-# Cloud Office
+# Cloud Office (Preview)
 
 Three private, offline-capable office apps that run entirely in the browser:
 
