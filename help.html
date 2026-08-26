@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Help - Cloud Office</title>
+<meta name="theme-color" content="#14161f" />
+<link rel="icon" href="icon-hub.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="theme.css" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  .wrap{ max-width:780px; margin:0 auto; padding:0 24px 60px; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid var(--line); background:var(--paper-raised); }
+  .brand{ display:flex; align-items:center; gap:9px; font-weight:800; font-size:16px; }
+  .brand .mark{ width:28px; height:28px; border-radius:8px; background:var(--ink); color:var(--paper); display:grid; place-items:center; font-size:13px; }
+  .back{ font-size:13px; color:var(--ink-soft); text-decoration:none; }
+  .back:hover{ color:var(--ink); }
+  h1{ font-size:22px; margin:28px 0 6px; }
+  p.lead{ font-size:13.5px; color:var(--ink-soft); margin:0 0 30px; }
+  .toc{ display:flex; gap:8px; margin-bottom:30px; flex-wrap:wrap; }
+  .toc a{ font-size:12.5px; font-weight:600; padding:7px 12px; border-radius:8px; border:1px solid var(--line); text-decoration:none; color:var(--ink); }
+  .toc a:hover{ background:var(--paper); }
+  section{ margin-bottom:36px; scroll-margin-top:20px; }
+  section h2{ font-size:16px; display:flex; align-items:center; gap:8px; margin:0 0 12px; }
+  section h2 .dot{ width:9px; height:9px; border-radius:50%; }
+  .word-dot{ background:var(--word); } .sheet-dot{ background:var(--sheet); } .slides-dot{ background:var(--slides); }
+  h3{ font-size:13.5px; margin:20px 0 8px; }
+  ul{ margin:0 0 8px; padding-left:20px; font-size:13.5px; line-height:1.7; color:var(--ink-soft); }
+  table.shortcuts{ width:100%; border-collapse:collapse; font-size:13px; margin-top:6px; }
+  table.shortcuts td{ padding:6px 4px; border-bottom:1px solid var(--line); }
+  table.shortcuts td:last-child{ text-align:right; font-family:var(--font-mono); color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="mark">C</span>Cloud Office</div>
+  <a class="back" href="index.html">Back to Cloud Office</a>
+</header>
+
+<main class="wrap">
+  <h1>Help</h1>
+  <p class="lead">Quick reference for Cloud Word, Cloud Sheet and Cloud PowerPoint.</p>
+
+  <div class="toc">
+    <a href="#general">General</a>
+    <a href="#word">Cloud Word</a>
+    <a href="#sheet">Cloud Sheet</a>
+    <a href="#slides">Cloud PowerPoint</a>
+  </div>
+
+  <section id="general">
+    <h2>General</h2>
+    <ul>
+      <li>Everything is saved automatically to this browser as you work. There is no server and no account.</li>
+      <li>Each app keeps a list of your files in a sidebar. Use New to start another one without losing the current file.</li>
+      <li>Clearing your browser's site data for this page will delete everything saved here. There is no cloud backup.</li>
+      <li>Settings (the gear icon) has a Light/Dark/System theme switch that applies to all three apps.</li>
+    </ul>
+  </section>
+
+  <section id="word">
+    <h2><span class="dot word-dot"></span>Cloud Word</h2>
+    <ul>
+      <li>File menu: new document, open a .docx/.txt/.html file, download, print, delete, close.</li>
+      <li>Insert images, tables, links, horizontal lines and page breaks from the Insert menu or toolbar.</li>
+      <li>Click inside a table cell to enable the row/column tools in the Table menu.</li>
+      <li>Line spacing and paragraph styles apply to the paragraph your cursor is in, or to a selection.</li>
+    </ul>
+    <h3>Keyboard shortcuts</h3>
+    <table class="shortcuts">
+      <tr><td>Bold / Italic / Underline</td><td>Ctrl+B / Ctrl+I / Ctrl+U</td></tr>
+      <tr><td>Undo / Redo</td><td>Ctrl+Z / Ctrl+Y</td></tr>
+      <tr><td>Find and replace</td><td>Ctrl+F</td></tr>
+      <tr><td>Save now</td><td>Ctrl+S</td></tr>
+    </table>
+  </section>
+
+  <section id="sheet">
+    <h2><span class="dot sheet-dot"></span>Cloud Sheet</h2>
+    <ul>
+      <li>Click and drag across cells to select a range. Shift-click extends a selection.</li>
+      <li>Formulas start with =. Supported functions include SUM, AVERAGE, MIN, MAX, COUNT, COUNTIF, SUMIF, VLOOKUP, IF, IFERROR, TEXT, ROUND and more.</li>
+      <li>Drag the small handle at the bottom right of a column header to resize it.</li>
+      <li>Merge cells and freeze the header row/column from the Format menu.</li>
+      <li>Select a range and use Insert &gt; Chart to add a bar, line or pie chart built from that data.</li>
+    </ul>
+    <h3>Keyboard shortcuts</h3>
+    <table class="shortcuts">
+      <tr><td>Copy / Cut / Paste</td><td>Ctrl+C / Ctrl+X / Ctrl+V</td></tr>
+      <tr><td>Undo / Redo</td><td>Ctrl+Z / Ctrl+Y</td></tr>
+      <tr><td>Find and replace</td><td>Ctrl+F</td></tr>
+      <tr><td>Edit the selected cell</td><td>Enter or F2</td></tr>
+      <tr><td>Clear selected cells</td><td>Delete</td></tr>
+    </table>
+  </section>
+
+  <section id="slides">
+    <h2><span class="dot slides-dot"></span>Cloud PowerPoint</h2>
+    <ul>
+      <li>Click an element to select it, drag to move it, and use the handle at its corner to resize.</li>
+      <li>Shift-click to select several elements at once, then use the Align tools to line them up.</li>
+      <li>Bring to front / send to back changes which element sits on top when shapes overlap.</li>
+      <li>Speaker notes are attached to the current slide and are included when you download a .pptx.</li>
+      <li>Present starts a full-screen slideshow. Use the arrow keys or click to move between slides.</li>
+    </ul>
+    <h3>Keyboard shortcuts</h3>
+    <table class="shortcuts">
+      <tr><td>Undo / Redo</td><td>Ctrl+Z / Ctrl+Y</td></tr>
+      <tr><td>Delete selected</td><td>Delete</td></tr>
+      <tr><td>Start presenting</td><td>F5</td></tr>
+      <tr><td>Exit presenting</td><td>Esc</td></tr>
+    </table>
+  </section>
+</main>
+
+<script src="db.js"></script>
+<script src="common.js"></script>
+<script>CloudCommon.initTheme();</script>
+</body>
+</html>

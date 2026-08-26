@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About - Cloud Office</title>
+<meta name="theme-color" content="#14161f" />
+<link rel="icon" href="icon-hub.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="theme.css" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  .wrap{ max-width:640px; margin:0 auto; padding:0 24px 60px; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid var(--line); background:var(--paper-raised); }
+  .brand{ display:flex; align-items:center; gap:9px; font-weight:800; font-size:16px; }
+  .brand .mark{ width:28px; height:28px; border-radius:8px; background:var(--ink); color:var(--paper); display:grid; place-items:center; font-size:13px; }
+  .back{ font-size:13px; color:var(--ink-soft); text-decoration:none; }
+  .back:hover{ color:var(--ink); }
+  h1{ font-size:22px; margin:28px 0 2px; }
+  .version{ font-size:12.5px; color:var(--ink-faint); font-family:var(--font-mono); margin-bottom:26px; }
+  section{ margin-bottom:26px; }
+  section h2{ font-size:14px; margin:0 0 8px; }
+  section p, section li{ font-size:13.5px; line-height:1.65; color:var(--ink-soft); }
+  section ul{ margin:0; padding-left:20px; }
+  .credit-box{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:var(--paper-raised); }
+  .credit-box .name{ font-weight:700; font-size:14.5px; }
+  .credit-box a{ color:var(--word-ink); text-decoration:none; font-size:13px; }
+  .credit-box a:hover{ text-decoration:underline; }
+  .apps-list{ display:flex; flex-direction:column; gap:6px; }
+  .apps-list .row{ display:flex; align-items:center; gap:10px; font-size:13.5px; }
+  .apps-list .tag{ width:22px; height:22px; border-radius:6px; display:grid; place-items:center; color:#fff; font-size:11px; font-weight:800; }
+  .apps-list .word{ background:var(--word); } .apps-list .sheet{ background:var(--sheet); } .apps-list .slides{ background:var(--slides); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="mark">C</span>Cloud Office</div>
+  <a class="back" href="index.html">Back to Cloud Office</a>
+</header>
+
+<main class="wrap">
+  <h1>About Cloud Office</h1>
+  <div class="version">Version 2.0.1</div>
+
+  <section>
+    <h2>What this is</h2>
+    <p>Cloud Office is three document editors that run entirely in your browser: Cloud Word, Cloud Sheet and Cloud PowerPoint.</p>
+    <div class="apps-list">
+      <div class="row"><span class="tag word">W</span>Cloud Word, a document editor that reads and writes .docx</div>
+      <div class="row"><span class="tag sheet">S</span>Cloud Sheet, a spreadsheet with formulas that reads and writes .xlsx</div>
+      <div class="row"><span class="tag slides">P</span>Cloud PowerPoint, a slide editor that exports .pptx</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <p>There is no server. Files are kept in this browser's local storage (IndexedDB) and never leave your device unless you choose to download or print them. Each app is a set of static HTML, CSS and JavaScript files, meant to be opened directly or hosted on any static file host.</p>
+  </section>
+
+  <section>
+    <h2>Third-party code included</h2>
+    <p>All libraries below are bundled as local files in this download. Nothing is fetched from the internet at run time.</p>
+    <ul>
+      <li>Mammoth.js, for reading .docx files</li>
+      <li>html-docx-js, for writing .docx files</li>
+      <li>SheetJS (xlsx), for reading and writing .xlsx/.csv files</li>
+      <li>PptxGenJS, for writing .pptx files</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Built by</h2>
+    <div class="credit-box">
+      <div class="name">Tasmon Islam</div>
+      <a href="mailto:tasmon@outlook.com">tasmon@outlook.com</a>
+    </div>
+  </section>
+</main>
+
+<script src="db.js"></script>
+<script src="common.js"></script>
+<script>CloudCommon.initTheme();</script>
+</body>
+</html>

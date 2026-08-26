@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cloud Office</title>
+<meta name="theme-color" content="#14161f" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon-hub.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="theme.css" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body{ overflow-x:hidden; }
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 24px 60px; }
+
+  header.top{
+    display:flex; align-items:center; justify-content:space-between; padding:16px 24px;
+    border-bottom:1px solid var(--line); background:var(--paper-raised);
+  }
+  .brand{ display:flex; align-items:center; gap:9px; font-weight:800; font-size:16px; letter-spacing:-.01em; }
+  .brand .mark{ width:28px; height:28px; border-radius:8px; background:var(--ink); color:var(--paper); display:grid; place-items:center; font-size:13px; }
+  .top-links{ display:flex; align-items:center; gap:4px; }
+  .top-links a, .top-links button{
+    font-size:13px; color:var(--ink-soft); text-decoration:none; padding:7px 10px; border-radius:7px; border:none; background:none;
+  }
+  .top-links a:hover, .top-links button:hover{ background:var(--paper); color:var(--ink); }
+
+  h1.page-title{ font-size:22px; margin:28px 0 4px; letter-spacing:-.01em; }
+  p.page-sub{ font-size:13.5px; color:var(--ink-soft); margin:0 0 24px; }
+
+  .apps{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:36px; }
+  @media (max-width:760px){ .apps{ grid-template-columns:1fr; } }
+
+  .app-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px; }
+  .app-card .top-row{ display:flex; align-items:center; gap:10px; }
+  .app-card .icon{ width:38px; height:38px; border-radius:9px; display:grid; place-items:center; color:#fff; font-weight:800; font-size:16px; flex-shrink:0; }
+  .app-card.word .icon{ background:var(--word); }
+  .app-card.sheet .icon{ background:var(--sheet); }
+  .app-card.slides .icon{ background:var(--slides); }
+  .app-card h3{ margin:0; font-size:15px; }
+  .app-card p{ margin:0; font-size:12.5px; color:var(--ink-faint); line-height:1.5; }
+  .app-card .actions{ display:flex; gap:8px; margin-top:2px; }
+  .app-card .actions a{ flex:1; text-align:center; text-decoration:none; padding:8px 10px; border-radius:8px; font-size:12.5px; font-weight:600; }
+  .app-card.word .actions a.primary{ background:var(--word); color:#fff; }
+  .app-card.sheet .actions a.primary{ background:var(--sheet); color:#fff; }
+  .app-card.slides .actions a.primary{ background:var(--slides); color:#fff; }
+  .app-card .actions a.secondary{ border:1px solid var(--line); color:var(--ink); }
+  .app-card .actions a.secondary:hover{ background:var(--paper); }
+
+  .recent-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .recent-head h2{ font-size:14px; margin:0; }
+  .recent-list{ display:flex; flex-direction:column; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper-raised); }
+  .recent-row{ display:flex; align-items:center; gap:12px; padding:11px 14px; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--line); }
+  .recent-row:last-child{ border-bottom:none; }
+  .recent-row:hover{ background:var(--paper); }
+  .recent-row .tag{ width:26px; height:26px; border-radius:7px; display:grid; place-items:center; color:#fff; font-size:11px; font-weight:800; flex-shrink:0; }
+  .recent-row.type-word .tag{ background:var(--word); }
+  .recent-row.type-sheet .tag{ background:var(--sheet); }
+  .recent-row.type-slides .tag{ background:var(--slides); }
+  .recent-row .name{ flex:1; font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .recent-row .when{ font-size:12px; color:var(--ink-faint); flex-shrink:0; }
+  .recent-row .del{ background:none; border:none; color:var(--ink-faint); font-size:12px; padding:4px; flex-shrink:0; }
+  .recent-row .del:hover{ color:var(--danger); }
+  .recent-empty{ border:1px dashed var(--line-strong); border-radius:12px; padding:26px; text-align:center; font-size:13px; color:var(--ink-faint); }
+
+  footer.hub-footer{ margin-top:40px; padding-top:18px; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  footer.hub-footer .credit{ font-size:12px; color:var(--ink-faint); }
+  footer.hub-footer .credit a{ color:var(--ink-soft); text-decoration:none; }
+  footer.hub-footer .credit a:hover{ text-decoration:underline; }
+  footer.hub-footer nav{ display:flex; gap:14px; }
+  footer.hub-footer nav a{ font-size:12px; color:var(--ink-faint); text-decoration:none; }
+  footer.hub-footer nav a:hover{ color:var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="mark">C</span>Cloud Office</div>
+  <div class="top-links">
+    <button id="btnSettings" type="button">Settings</button>
+    <a href="help.html">Help</a>
+    <a href="about.html">About</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Start something</h1>
+  <p class="page-sub">Pick an app to create a new file, or open something recent below.</p>
+
+  <div class="apps">
+    <div class="app-card word">
+      <div class="top-row"><span class="icon">W</span><h3>Cloud Word</h3></div>
+      <p>Documents with formatting, tables and images. Reads and writes .docx.</p>
+      <div class="actions">
+        <a class="primary" href="word.html?new=1">New document</a>
+        <a class="secondary" href="word.html">Open</a>
+      </div>
+    </div>
+    <div class="app-card sheet">
+      <div class="top-row"><span class="icon">S</span><h3>Cloud Sheet</h3></div>
+      <p>Spreadsheets with formulas, charts and formatting. Reads and writes .xlsx.</p>
+      <div class="actions">
+        <a class="primary" href="sheet.html?new=1">New sheet</a>
+        <a class="secondary" href="sheet.html">Open</a>
+      </div>
+    </div>
+    <div class="app-card slides">
+      <div class="top-row"><span class="icon">P</span><h3>Cloud PowerPoint</h3></div>
+      <p>Slide decks with shapes, images and a present mode. Exports to .pptx.</p>
+      <div class="actions">
+        <a class="primary" href="slides.html?new=1">New presentation</a>
+        <a class="secondary" href="slides.html">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="recent-head"><h2>Recent files</h2></div>
+  <div id="recentWrap"></div>
+
+  <footer class="hub-footer">
+    <span class="credit">Cloud Office 2.0.1. Built by <a href="mailto:tasmon@outlook.com">Tasmon Islam</a>.</span>
+    <nav><a href="help.html">Help</a><a href="about.html">About</a></nav>
+  </footer>
+</main>
+
+<div class="modal-backdrop" id="settingsModal" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><h2>Settings</h2><button class="icon-btn" onclick="CloudCommon.closeModal('settingsModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="setting-row">
+        <div><div class="label">Theme</div><div class="desc">Applies across Word, Sheet and PowerPoint.</div></div>
+        <div class="theme-choices">
+          <button data-theme-choice="light">Light</button>
+          <button data-theme-choice="dark">Dark</button>
+          <button data-theme-choice="system">System</button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div><div class="label">Storage</div><div class="desc">Everything is saved in this browser only. Nothing is uploaded.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="db.js"></script>
+<script src="common.js"></script>
+<script>
+CloudCommon.initTheme();
+CloudCommon.initModalDismiss();
+document.getElementById('btnSettings').addEventListener('click', () => CloudCommon.openModal('settingsModal'));
+
+const SOURCES = [
+  { app: 'word', label: 'Cloud Word', dbName: 'cloud-word', store: 'documents', page: 'word.html' },
+  { app: 'sheet', label: 'Cloud Sheet', dbName: 'cloud-sheet', store: 'workbooks', page: 'sheet.html' },
+  { app: 'slides', label: 'Cloud PowerPoint', dbName: 'cloud-slides', store: 'decks', page: 'slides.html' },
+];
+
+function formatWhen(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return sameDay ? `Today, ${time}` : d.toLocaleDateString([], { month: 'short', day: 'numeric' }) + `, ${time}`;
+}
+
+async function loadRecent() {
+  const wrap = document.getElementById('recentWrap');
+  let all = [];
+  for (const src of SOURCES) {
+    try {
+      const db = new CloudDB(src.dbName, src.store);
+      const items = await db.getAll();
+      items.forEach(it => all.push({ ...src, id: it.id, title: it.title || 'Untitled', updatedAt: it.updatedAt || 0 }));
+    } catch (e) { /* store not created yet - fine */ }
+  }
+  all.sort((a, b) => b.updatedAt - a.updatedAt);
+  all = all.slice(0, 10);
+
+  if (all.length === 0) {
+    wrap.innerHTML = '<div class="recent-empty">Nothing yet. Create a document, sheet or presentation above.</div>';
+    return;
+  }
+
+  const list = document.createElement('div');
+  list.className = 'recent-list';
+  all.forEach(item => {
+    const row = document.createElement('a');
+    row.className = 'recent-row type-' + item.app;
+    row.href = `${item.page}?doc=${encodeURIComponent(item.id)}`;
+    row.innerHTML = `
+      <span class="tag">${item.app === 'word' ? 'W' : item.app === 'sheet' ? 'S' : 'P'}</span>
+      <span class="name"></span>
+      <span class="when"></span>
+      <button class="del" title="Delete" type="button">Delete</button>
+    `;
+    row.querySelector('.name').textContent = item.title;
+    row.querySelector('.when').textContent = formatWhen(item.updatedAt);
+    row.querySelector('.del').addEventListener('click', async (e) => {
+      e.preventDefault(); e.stopPropagation();
+      if (!confirm(`Delete "${item.title}"? This can't be undone.`)) return;
+      const db = new CloudDB(item.dbName, item.store);
+      await db.delete(item.id);
+      loadRecent();
+    });
+    list.appendChild(row);
+  });
+  wrap.innerHTML = '';
+  wrap.appendChild(list);
+}
+loadRecent();
+</script>
+</body>
+</html>

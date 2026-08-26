@@ -1,0 +1,54 @@
+.app{ height:100vh; display:flex; flex-direction:column; }
+
+#fontFamily{ width:150px; } #fontSize{ width:60px; } #blockFormat{ width:118px; } #lineSpacing{ width:88px; } #zoomSelect{ width:78px; }
+
+.menu-wrap{ position:relative; }
+.menu{
+  position:absolute; right:0; top:calc(100% + 6px); background:var(--paper-raised);
+  border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow-md);
+  display:none; flex-direction:column; min-width:200px; padding:6px; z-index:40;
+}
+.menu.open{ display:flex; }
+.menu button{ text-align:left; background:none; border:none; padding:9px 10px; border-radius:6px; font-size:13.5px; color:var(--ink); width:100%; }
+.menu button:hover{ background:var(--word-tint); }
+
+.workspace{ flex:1; display:flex; min-height:0; }
+
+.canvas{ flex:1; overflow-y:auto; padding:36px 20px 80px; background:var(--paper); }
+.page{
+  max-width:816px; min-height:1056px; margin:0 auto; background:var(--paper-raised);
+  box-shadow:var(--shadow-md); padding:96px 90px; border-radius:2px;
+  font-size:12pt; line-height:1.65; outline:none; color:var(--ink);
+}
+.page h1{ font-size:1.9em; margin:.5em 0 .3em; letter-spacing:-.01em; }
+.page h2{ font-size:1.5em; margin:.6em 0 .3em; }
+.page h3{ font-size:1.2em; margin:.6em 0 .3em; }
+.page p{ margin:0 0 .8em; }
+.page blockquote{ border-left:3px solid var(--word); margin:.8em 0; padding:2px 0 2px 16px; color:var(--ink-soft); }
+.page pre{ background:var(--paper); padding:12px 14px; border-radius:8px; overflow-x:auto; font-family:var(--font-mono); font-size:.85em; }
+.page table{ border-collapse:collapse; margin:.8em 0; width:100%; }
+.page table td{ border:1px solid var(--line-strong); padding:6px 9px; min-width:40px; }
+.page img{ max-width:100%; border-radius:4px; }
+.page a{ color:var(--word-ink); }
+.page .page-break{ height:0; border-top:2px dashed var(--line-strong); margin:28px 0; position:relative; }
+.page .page-break::after{
+  content:'Page break'; position:absolute; top:-9px; left:50%; transform:translateX(-50%);
+  background:var(--paper-raised); padding:0 8px; font-size:10.5px; color:var(--ink-faint); letter-spacing:.04em; text-transform:uppercase;
+}
+.page:empty:before{ content:'Start writing'; color:var(--ink-faint); }
+
+/* ---------- print ---------- */
+@media print{
+  .appbar, .menubar, .toolbar, .sidebar, .statusbar, .find-bar{ display:none !important; }
+  .canvas{ padding:0; overflow:visible; }
+  .page{ box-shadow:none; margin:0; padding:0; max-width:none; min-height:0; }
+  .page .page-break{ border:none; margin:0; page-break-after:always; }
+  .page .page-break::after{ content:none; }
+}
+
+@media (max-width:760px){
+  .sidebar{ position:fixed; z-index:30; top:0; bottom:0; left:0; box-shadow:var(--shadow-lg); }
+  .sidebar.collapsed{ margin-left:-260px; }
+  .page{ padding:40px 24px; }
+  .doc-title{ min-width:90px; }
+}

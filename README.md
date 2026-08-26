@@ -1,35 +1,51 @@
-# Cloud Office (Preview)
+# Cloud Office 2.0.1
 
-Three private, offline-capable office apps that run entirely in the browser:
+Cloud Word, Cloud Sheet and Cloud PowerPoint. Three office apps that run
+entirely in your browser. No server, no account, no network requests at
+runtime. Everything is saved to this browser's local storage (IndexedDB)
+and stays on your device.
 
-- **Cloud Word** — rich-text document editor. Opens/saves `.docx`, `.html`, `.txt`.
-- **Cloud Sheet** — spreadsheet with formulas (`SUM`, `AVERAGE`, `IF`, ranges, etc). Opens/saves `.xlsx`, `.csv`.
-- **Cloud PowerPoint** — slide editor with shapes, images and a present mode. Exports `.pptx`, prints to PDF.
+## Files
 
-Everything is stored **only in the visitor's browser** (IndexedDB). There is no
-backend, no account, and no data ever leaves the device — which is also what
-makes this trivial to host for free.
-
-## Project structure
+Every file sits in one flat folder, no subfolders. This is intentional so
+the whole thing can be unzipped and opened directly, or dropped onto any
+static file host with zero configuration.
 
 ```
-cloud-office/
-  index.html         ← hub / landing page (About section with your name + email)
-  shared/             ← shared CSS tokens + tiny IndexedDB helper, used by all 3 apps
-  word/               ← Cloud Word (index.html, word.css, word.js, manifest.json, sw.js)
-  sheet/              ← Cloud Sheet
-  slides/              ← Cloud PowerPoint
-  icons/              ← generated PWA icons + favicons
+index.html          hub / launcher, cross-app recent files list
+word.html            Cloud Word
+sheet.html           Cloud Sheet
+slides.html          Cloud PowerPoint
+help.html            help center
+about.html           about / version / credits
+
+theme.css             design tokens, light/dark theme, [hidden] fix
+common.css            shared chrome: menu bar, sidebar, modals
+common.js              shared behavior: theme toggle, menu bar, modals
+db.js                  tiny IndexedDB helper used by all three apps
+undo.js                 generic undo/redo history manager
+
+word.css / word.js
+sheet.css / sheet.js
+slides.css / slides.js
+
+manifest.json         PWA manifest for the whole suite
+sw.js                  service worker, caches the app shell for offline use
+
+icon-*.svg / icon-*.png    app icons
+
+mammoth.browser.min.js     reads .docx (Cloud Word)
+html-docx.js                writes .docx (Cloud Word)
+xlsx.full.min.js            reads/writes .xlsx and .csv (Cloud Sheet)
+pptxgen.bundle.js           writes .pptx (Cloud PowerPoint)
 ```
 
-Each app is a self-contained folder with its own `manifest.json` and service
-worker (`sw.js`), so each one installs as its **own** PWA (separate icon,
-separate offline cache) even though they share the hub page and the `shared/`
-CSS + storage helper.
+The four libraries above are the only third-party code included. They are
+bundled as plain local files: nothing is fetched from a CDN or any other
+URL at runtime. Open any `.html` file directly (`file://`) or serve the
+folder with any static file server and it works offline.
 
 ## Run it locally
-
-No build step — it's static HTML/CSS/JS. Any static file server works:
 
 ```bash
 cd cloud-office
@@ -37,49 +53,53 @@ python3 -m http.server 8080
 # open http://localhost:8080
 ```
 
-(Opening `index.html` directly via `file://` mostly works too, but IndexedDB
-and service workers are more reliable over `http://localhost`.)
+Opening `index.html` directly by double-clicking also works in most
+browsers; a local server is only slightly more reliable for IndexedDB and
+the service worker.
 
-## Deploy to GitHub Pages
+## Deploy
 
-1. Push this folder to a GitHub repo (the contents of `cloud-office/`, not the
-   folder itself, should be at the repo root — or set Pages to serve from a
-   subfolder).
-2. Repo → **Settings → Pages** → Source: **Deploy from a branch** → pick
-   `main` and `/ (root)`.
-3. Your site will be live at `https://<username>.github.io/<repo>/`.
+Any static host works: GitHub Pages, Vercel, Netlify, an S3 bucket, or an
+internal file share. Push the contents of this folder (not the folder
+itself) to the root of the site. No build step.
 
-## Deploy to Vercel
+## What's new in 2.0.1
 
-1. Push the folder to a GitHub repo (or run `vercel` from inside
-   `cloud-office/` with the Vercel CLI).
-2. In the Vercel dashboard, **Add New Project** → import the repo.
-3. Framework preset: **Other** (it's static — no build command, no output
-   directory override needed since everything is already static HTML).
-4. Deploy. Vercel serves it instantly over HTTPS (required for service
-   workers/PWA install to work).
+- Every file is local. No CDN dependencies, works fully offline.
+- Flat file layout: one folder, no subfolders.
+- Redesigned hub page: an app launcher with a cross-app recent-files list,
+  not a marketing page.
+- Menu bars (File, Edit, Insert, Format, ...) in all three apps, in
+  addition to the icon toolbar.
+- Cloud Sheet and Cloud PowerPoint now support multiple saved files with
+  the same sidebar pattern Cloud Word already had (New / switch / delete).
+- Settings (light/dark/system theme), Help center, and About pages.
+- Fixed: Cloud Word's Find & Replace close button, and Cloud Sheet's chart
+  dialog, could get stuck open. The cause was a CSS rule that set
+  `display` unconditionally on the same element the `hidden` attribute
+  targeted, so the attribute had no visible effect. `theme.css` now
+  carries one rule, `[hidden] { display: none !important; }`, that makes
+  `hidden` authoritative everywhere in the suite going forward.
+- Cloud Word: expanded font list, working line spacing (previously it
+  could silently do nothing if a toolbar dropdown had stolen the
+  browser's text selection before the change fired).
 
-Both hosts serve everything over HTTPS by default, which is required for the
-"Install app" prompt and for the service workers to register.
+## Known limits
 
-## Notes on the third-party libraries used
+- Cloud Sheet's cell merge hides borders and redirects edits to the
+  top-left cell rather than using a true HTML colspan/rowspan.
+- Copy/paste in Cloud Sheet does not shift relative formula references.
+- Row/column insert-delete does not renumber existing merges.
+- Cloud Word's Find & Replace matches within a single formatting run; it
+  won't find a phrase split across two different bold/italic spans.
 
-Each app pulls in one small, well-known library from a public CDN purely to
-read/write real Office file formats — none of them ever send your document
-anywhere; they run fully client-side:
+## Third-party licenses
 
-- **Cloud Word** — [mammoth.js](https://github.com/mwilliamson/mammoth.js) (.docx → HTML) and [html-docx-js](https://github.com/evidenceprime/html-docx-js) (HTML → .docx)
-- **Cloud Sheet** — [SheetJS / xlsx](https://github.com/SheetJS/sheetjs) (.xlsx/.csv read+write)
-- **Cloud PowerPoint** — [PptxGenJS](https://github.com/gitbrent/PptxGenJS) (.pptx generation)
+Mammoth.js, html-docx-js, SheetJS (xlsx), and PptxGenJS each ship under
+their own open-source licenses, included in their minified files' headers
+where present. Check each project's repository for full license text if
+you need it.
 
-If you'd rather have zero external requests (fully offline from first load),
-download these libraries into each app folder and change the `<script src>`
-tags to point at the local copies — everything else already works offline via
-the service workers.
+---
 
-## Customizing
-
-- Colors/fonts: `shared/theme.css` (CSS custom properties at the top).
-- Rename the apps: update the `<title>`, `manifest.json` `name`/`short_name`,
-  and the on-page headings.
-- About section (name + email) lives at the bottom of `index.html`.
+Built by Tasmon Islam (tasmon@outlook.com)

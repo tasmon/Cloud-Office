@@ -1,0 +1,126 @@
+/* Cloud Office 2.0.1 - shared app chrome (menu bar, dropdowns, modals, doc sidebar) */
+
+/* ---------- top identity bar ---------- */
+.appbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 14px; border-bottom:1px solid var(--line); background:var(--paper-raised); gap:12px; flex-wrap:wrap;
+}
+.appbar-left, .appbar-right{ display:flex; align-items:center; gap:6px; }
+.hub-link{ text-decoration:none; display:flex; }
+.hub-link .mark{
+  width:28px; height:28px; border-radius:8px; background:var(--ink); color:var(--paper);
+  display:grid; place-items:center; font-weight:800; font-size:13px;
+}
+.app-name{ font-weight:700; font-size:14.5px; letter-spacing:-.01em; margin-right:2px; }
+.doc-title{
+  border:1px solid transparent; background:transparent; font-size:14.5px; font-weight:600;
+  padding:6px 8px; border-radius:7px; min-width:140px; max-width:320px;
+}
+.doc-title:hover, .doc-title:focus{ border-color:var(--line); background:var(--paper); }
+
+.icon-btn{
+  width:32px; height:32px; border-radius:8px; border:1px solid transparent; background:transparent;
+  font-size:15px; color:var(--ink-soft); display:grid; place-items:center;
+}
+.icon-btn:hover{ background:var(--accent-tint,var(--word-tint)); color:var(--ink); }
+
+.save-status{ font-size:12px; color:var(--ink-faint); margin-right:4px; white-space:nowrap; }
+
+.btn{
+  border:1px solid var(--line); background:var(--paper-raised); padding:7px 13px;
+  border-radius:8px; font-size:13.5px; font-weight:600;
+}
+.btn.small{ padding:6px 9px; font-size:12px; }
+.btn.ghost:hover{ background:var(--accent-tint,var(--word-tint)); border-color:var(--accent,var(--word)); }
+.btn.primary{ background:var(--accent,var(--word)); border-color:var(--accent,var(--word)); color:#fff; }
+.btn.primary:hover{ filter:brightness(0.92); }
+.file-btn{ display:inline-flex; align-items:center; }
+
+/* ---------- menu bar (File / Edit / Insert ...) ---------- */
+.menubar{
+  display:flex; align-items:center; gap:2px; padding:4px 10px; background:var(--paper-raised);
+  border-bottom:1px solid var(--line); position:relative; z-index:50; flex-wrap:wrap;
+}
+.menubar-item{
+  position:relative; padding:6px 10px; border-radius:6px; font-size:13px; font-weight:500;
+  background:none; border:none; color:var(--ink);
+}
+.menubar-item:hover, .menubar-item.open{ background:var(--accent-tint,var(--word-tint)); }
+.menubar-dropdown{
+  position:absolute; top:calc(100% + 4px); left:0; min-width:230px; background:var(--paper-raised);
+  border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow-md); padding:6px; display:none;
+  flex-direction:column; max-height:70vh; overflow-y:auto;
+}
+.menubar-dropdown.open{ display:flex; }
+.menubar-dropdown button{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; text-align:left;
+  background:none; border:none; padding:8px 10px; border-radius:6px; font-size:13px; color:var(--ink);
+  width:100%;
+}
+.menubar-dropdown button:hover:not(:disabled){ background:var(--accent-tint,var(--word-tint)); }
+.menubar-dropdown button:disabled{ opacity:.4; cursor:default; }
+.menubar-dropdown button .shortcut{ font-size:11px; color:var(--ink-faint); font-family:var(--font-mono); }
+.menubar-dropdown .menu-sep{ height:1px; background:var(--line); margin:5px 2px; border:none; }
+.menubar-dropdown .menu-label{ font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); padding:6px 10px 2px; }
+.menubar-dropdown button.checked::before{ content:'✓ '; color:var(--accent,var(--word)); }
+.menubar-dropdown button:not(.checked)::before{ content:''; }
+
+/* ---------- generic toolbar row (icon buttons under the menu bar) ---------- */
+.toolbar{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:7px 14px; background:var(--paper); border-bottom:1px solid var(--line); }
+.tgroup{ display:flex; align-items:center; gap:4px; }
+.tsep{ width:1px; height:22px; background:var(--line); margin:0 4px; }
+.tbtn{ min-width:30px; height:30px; padding:0 8px; border-radius:7px; border:1px solid transparent; background:transparent; font-size:13.5px; color:var(--ink); display:inline-flex; align-items:center; justify-content:center; }
+.tbtn.wide{ padding:0 10px; font-size:12.5px; font-weight:600; }
+.tbtn:hover{ background:var(--accent-tint,var(--word-tint)); }
+.tbtn.active{ background:var(--accent,var(--word)); color:#fff; }
+.color-btn{ position:relative; overflow:hidden; }
+.color-btn input{ position:absolute; inset:0; opacity:0; cursor:pointer; }
+.toolbar select{ height:30px; border-radius:7px; border:1px solid var(--line); background:var(--paper-raised); color:var(--ink); font-size:12.5px; padding:0 6px; }
+
+/* ---------- document sidebar (used by all three apps for multi-doc support) ---------- */
+.sidebar{
+  width:230px; border-right:1px solid var(--line); background:var(--paper-raised);
+  padding:14px; overflow-y:auto; flex-shrink:0; transition:margin-left .18s ease;
+}
+.sidebar.collapsed{ margin-left:-230px; }
+.new-doc-btn{
+  width:100%; padding:10px; border-radius:9px; border:1.5px dashed var(--line-strong);
+  background:transparent; font-size:13.5px; font-weight:600; color:var(--ink-soft); margin-bottom:12px;
+}
+.new-doc-btn:hover{ border-color:var(--accent,var(--word)); color:var(--ink); background:var(--accent-tint,var(--word-tint)); }
+.sidebar-label{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); margin:2px 0 8px; }
+.doc-list{ display:flex; flex-direction:column; gap:5px; }
+.doc-item{ padding:9px 10px; border-radius:8px; cursor:pointer; border:1px solid transparent; display:flex; flex-direction:column; gap:2px; }
+.doc-item:hover{ background:var(--paper); }
+.doc-item.active{ background:var(--accent-tint,var(--word-tint)); border-color:var(--accent,var(--word)); }
+.doc-item .name{ font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.doc-item .meta{ font-size:11px; color:var(--ink-faint); display:flex; justify-content:space-between; }
+.doc-item .del{ opacity:0; background:none; border:none; color:var(--danger); font-size:12px; padding:0 3px; }
+.doc-item:hover .del{ opacity:1; }
+
+/* ---------- generic modal (settings / about / find-replace popovers etc) ---------- */
+.modal-backdrop{ position:fixed; inset:0; background:rgba(10,11,16,.5); z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
+.modal-box{ background:var(--paper-raised); border-radius:14px; box-shadow:var(--shadow-lg); width:min(520px,100%); max-height:85vh; overflow-y:auto; }
+.modal-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--line); }
+.modal-head h2{ margin:0; font-size:16px; }
+.modal-body{ padding:18px 20px; }
+.modal-body p{ font-size:13.5px; line-height:1.6; color:var(--ink-soft); margin:0 0 12px; }
+.modal-foot{ display:flex; justify-content:flex-end; gap:8px; padding:14px 20px; border-top:1px solid var(--line); }
+
+.setting-row{ display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); }
+.setting-row:last-child{ border-bottom:none; }
+.setting-row .label{ font-size:13.5px; font-weight:600; }
+.setting-row .desc{ font-size:12px; color:var(--ink-faint); margin-top:2px; }
+.theme-choices{ display:flex; gap:6px; }
+.theme-choices button{
+  border:1px solid var(--line); background:var(--paper); padding:6px 12px; border-radius:7px; font-size:12.5px; font-weight:600; color:var(--ink);
+}
+.theme-choices button.active{ border-color:var(--accent,var(--word)); background:var(--accent-tint,var(--word-tint)); color:var(--ink); }
+
+/* ---------- find bar ---------- */
+.find-bar{ display:flex; align-items:center; gap:8px; padding:8px 14px; border-bottom:1px solid var(--line); background:var(--paper-raised); }
+.find-bar input{ border:1px solid var(--line); border-radius:7px; padding:6px 10px; font-size:13px; width:160px; background:var(--paper-raised); color:var(--ink); }
+.find-count{ font-size:12px; color:var(--ink-faint); }
+
+.statusbar{ border-top:1px solid var(--line); background:var(--paper-raised); padding:7px 16px; font-size:12px; color:var(--ink-faint); display:flex; gap:8px; flex-wrap:wrap; }
+.statusbar .sep{ opacity:.5; }
