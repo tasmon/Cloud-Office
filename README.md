@@ -1,4 +1,4 @@
-# Cloud Office 2.0.1
+# PWA Office 2.0.1 (Preview)
 
 Cloud Word, Cloud Sheet and Cloud PowerPoint. Three office apps that run
 entirely in your browser. No server, no account, no network requests at
